@@ -12,7 +12,7 @@ import { useLocalSearchParams } from "expo-router";
 import FlashCard from "./FlashCard";
 import { useSharedValue } from "react-native-reanimated";
 import { DATA } from "../data/data";
-
+import { useRouter } from "expo-router";
 const FlashCards = () => {
   const [isFlipped, setFlipped] = useState(false);
   const params = useLocalSearchParams();
@@ -23,6 +23,7 @@ const FlashCards = () => {
 
   const { width, height } = useWindowDimensions();
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const router = useRouter();
 
   const [card, setCard] = useState(
     <FlashCard
@@ -35,17 +36,18 @@ const FlashCards = () => {
     // You can implement logic here to fetch the next flashcard
     // and update the `currentCard` state.
     console.log("NEXT BUTTON TAPPED");
+    router.push("/flashcards/complete");
 
-    const nextIndex = (currentCardIndex + 1) % flashcards.length;
-    setCurrentCardIndex(nextIndex);
-    setCard(
-      <FlashCard
-        key={nextIndex}
-        question={flashcards[nextIndex].question}
-        answer={flashcards[nextIndex].answer}
-        getNextCard={getNextCard}
-      />
-    );
+    // const nextIndex = (currentCardIndex + 1) % flashcards.length;
+    // setCurrentCardIndex(nextIndex);
+    // setCard(
+    //   <FlashCard
+    //     key={nextIndex}
+    //     question={flashcards[nextIndex].question}
+    //     answer={flashcards[nextIndex].answer}
+    //     getNextCard={getNextCard}
+    //   />
+    // );
   };
 
   return (

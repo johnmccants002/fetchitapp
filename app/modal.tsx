@@ -35,10 +35,10 @@ const ContactSupportScreen = () => {
   return (
     <View style={styles.container}>
       {/* Company Logo */}
-      <Image
+      {/* <Image
         source={require("../assets/images/logo.png")}
         style={styles.logo}
-      />
+      /> */}
 
       {/* Welcome Message */}
       <Text style={styles.title}>
