@@ -9,12 +9,16 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { useRouter } from "expo-router";
+import BackgroundAnimation from "./PanBackgroundImage";
 
 const CompletionScreen = () => {
   const router = useRouter();
   const { height, width } = useWindowDimensions();
   return (
     <View style={styles.container}>
+      <BackgroundAnimation />
+      <Text style={styles.headerText}>Congrats!</Text>
+
       <View style={[styles.container, { height: height / 1.5 }]}>
         <View>
           <View style={styles.scoreContainer}>
@@ -62,6 +66,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+    alignSelf: "center",
+    paddingTop: 80,
   },
   scoreContainer: {
     flexDirection: "row",
