@@ -70,15 +70,6 @@ const FlashCard = (props) => {
           </View>
         </View>
       </Pressable>
-      <View style={[styles.buttonsContainer, { width: width * 0.8 }]}>
-        <TouchableOpacity style={[styles.button, { backgroundColor: "red" }]}>
-          <MaterialCommunityIcons name="close" size={24} color="white" />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={[styles.button, { backgroundColor: "green" }]}>
-          <MaterialCommunityIcons name="check" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
     </>
   );
 };

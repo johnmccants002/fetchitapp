@@ -3,6 +3,8 @@
 import { useContext, useEffect } from "react";
 import axios from "axios";
 import { FlashCardsContext } from "../components/FlashCardsContext";
+import { DATA } from "../data/data";
+import { useLocalSearchParams } from "expo-router";
 
 const useFlashCards = () => {
   const context = useContext(FlashCardsContext);
@@ -11,25 +13,43 @@ const useFlashCards = () => {
     throw new Error("useFlashCards must be used within a FlashCardsProvider");
   }
 
+  const { id } = useLocalSearchParams();
+
   const [state, dispatch] = context;
 
+  //   useEffect(() => {
+  //     axios
+  //       .get("/api/flashcards")
+  //       .then((response) => {
+  //         dispatch({ type: "SET_CARDS", payload: response.data });
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching flashcards:", error);
+  //       });
+  //   }, [dispatch]);
+
   useEffect(() => {
-    axios
-      .get("/api/flashcards")
-      .then((response) => {
-        dispatch({ type: "SET_CARDS", payload: response.data });
-      })
-      .catch((error) => {
-        console.error("Error fetching flashcards:", error);
-      });
-  }, [dispatch]);
+    dispatch({ type: "SET_CARDS", payload: DATA[Number(id)].cards });
+  }, []);
+
+  const incorrectAnswer = () => {
+    dispatch({ type: "ANSWER_INCORRECT" });
+  };
+
+  const correctAnswer = () => {
+    dispatch({ type: "ANSWER_CORRECT" });
+  };
 
   return {
     cards: state.cards,
-    correctCount: state.correctCount,
+    correctArray: state.correctArray,
+    incorrectArray: state.incorrectArray,
     currentIndex: state.currentIndex,
     isFinished: state.isFinished,
     dispatch,
+    incorrectAnswer,
+    correctAnswer,
+    state: state,
   };
 };
 

@@ -1,5 +1,5 @@
 // CompletionScreen.js
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -10,10 +10,22 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import BackgroundAnimation from "./PanBackgroundImage";
+import useFlashCards from "../hooks/useFlashCards";
+import { FlashCardsContext } from "./FlashCardsContext";
 
 const CompletionScreen = () => {
   const router = useRouter();
   const { height, width } = useWindowDimensions();
+  const context = useContext(FlashCardsContext);
+
+  if (!context) {
+    throw new Error(
+      "CompletionScreen must be used within a FlashCardsProvider"
+    );
+  }
+
+  // Extract the state and dispatch (if you need it) from the context
+  const [state, dispatch] = context;
   return (
     <View style={styles.container}>
       <BackgroundAnimation />
@@ -23,11 +35,15 @@ const CompletionScreen = () => {
         <View>
           <View style={styles.scoreContainer}>
             <Text style={styles.scoreText}>Incorrect</Text>
-            <Text style={styles.scoreCount}>X/X</Text>
+            <Text
+              style={styles.scoreCount}
+            >{`${state.incorrectArray.length} / ${state.cards.length}`}</Text>
           </View>
           <View style={styles.scoreContainer}>
             <Text style={styles.scoreText}>Correct</Text>
-            <Text style={styles.scoreCount}>X/X</Text>
+            <Text
+              style={styles.scoreCount}
+            >{`${state.correctArray.length} / ${state.cards.length}`}</Text>
           </View>
         </View>
         <View>

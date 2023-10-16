@@ -5,18 +5,21 @@ import React from "react";
 type FlashCard = {
   question: string;
   answer: string;
+  id: number;
 };
 
 export type State = {
   cards: FlashCard[];
-  correctCount: number;
+  correctArray: Array<string | number>;
+  incorrectArray: Array<string | number>;
   currentIndex: number;
   isFinished: boolean;
 };
 
 const initialState: State = {
   cards: [],
-  correctCount: 0,
+  correctArray: [],
+  incorrectArray: [],
   currentIndex: 0,
   isFinished: false,
 };

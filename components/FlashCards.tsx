@@ -1,20 +1,19 @@
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
-  View,
+  Modal,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  StyleSheet,
+  View,
   useWindowDimensions,
-  ImageBackground,
-  Modal,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useLocalSearchParams } from "expo-router";
-import FlashCard from "./FlashCard";
-import { useSharedValue } from "react-native-reanimated";
 import { DATA } from "../data/data";
-import { useRouter } from "expo-router";
+import useFlashCards from "../hooks/useFlashCards";
 import CompletionScreen from "./CompleteScreen";
+import FlashCard from "./FlashCard";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 const FlashCards = () => {
   const [isFlipped, setFlipped] = useState(false);
   const params = useLocalSearchParams();
@@ -22,18 +21,40 @@ const FlashCards = () => {
   const { id } = params;
   console.log(Number(id), "ID");
   const flashcards = DATA[Number(id)].cards;
+  const { cards, currentIndex, correctAnswer, incorrectAnswer, state } =
+    useFlashCards();
 
   const { width, height } = useWindowDimensions();
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [complete, setComplete] = useState(false);
   const router = useRouter();
 
-  const [card, setCard] = useState(
-    <FlashCard
-      question={flashcards[0].question}
-      answer={flashcards[0].answer}
-    />
-  );
+  const [card, setCard] = useState<React.ReactElement | null>(null);
+
+  useEffect(() => {
+    if (cards.length > 0) {
+      setCard(
+        <FlashCard question={cards[0].question} answer={cards[0].answer} />
+      );
+    }
+  }, [cards]);
+
+  useEffect(() => {
+    if (state.currentIndex && state.currentIndex < state.cards.length) {
+      setCard(
+        <FlashCard
+          question={cards[state.currentIndex].question}
+          answer={cards[state.currentIndex].answer}
+        />
+      );
+    }
+  }, [state.currentIndex]);
+
+  useEffect(() => {
+    if (state.isFinished) {
+      setComplete(true);
+    }
+  }, [state.isFinished]);
 
   const getNextCard = () => {
     // You can implement logic here to fetch the next flashcard
@@ -55,11 +76,23 @@ const FlashCards = () => {
 
   return (
     <View style={[styles.container, { height: height / 2 }]}>
-      {card}
+      {card && card}
 
-      <TouchableOpacity style={styles.nextButton} onPress={getNextCard}>
-        <Text style={styles.nextButtonText}>Next Card</Text>
-      </TouchableOpacity>
+      <View style={[styles.buttonsContainer, { width: width * 0.8 }]}>
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: "red" }]}
+          onPress={incorrectAnswer}
+        >
+          <MaterialCommunityIcons name="close" size={24} color="white" />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: "green" }]}
+          onPress={correctAnswer}
+        >
+          <MaterialCommunityIcons name="check" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
 
       <Modal
         visible={complete}
