@@ -8,6 +8,7 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
+import backgroundImage from "../assets/images/doglogo.png";
 
 // Import your company's logo image here
 
@@ -41,35 +42,40 @@ const ContactSupportScreen = () => {
       /> */}
 
       {/* Welcome Message */}
-      <Text style={styles.title}>
-        Welcome to our app! We value your feedback. Please feel free to share
-        any issues or suggestions you may have.
-      </Text>
+      <View>
+        <Text style={styles.title}>
+          Welcome to our app! We value your feedback. Please feel free to share
+          any issues or suggestions you may have.
+        </Text>
+        <Image source={backgroundImage} style={styles.image} />
+      </View>
 
       {/* Contact Form */}
-      <TextInput
-        style={styles.input}
-        placeholder="Your Name"
-        value={name}
-        onChangeText={(text) => setName(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Your Email"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-        keyboardType="email-address"
-      />
-      <TextInput
-        style={[styles.input, styles.messageInput]}
-        placeholder="Your Message"
-        value={message}
-        onChangeText={(text) => setMessage(text)}
-        multiline
-      />
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Your Name"
+          value={name}
+          onChangeText={(text) => setName(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Your Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+          keyboardType="email-address"
+        />
+        <TextInput
+          style={[styles.input, styles.messageInput]}
+          placeholder="Your Message"
+          value={message}
+          onChangeText={(text) => setMessage(text)}
+          multiline
+        />
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -78,8 +84,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
+    paddingTop: 120,
+    paddingBottom: 150,
+  },
+  inputContainer: {
+    width: "100%",
   },
   logo: {
     width: 150, // Adjust the width and height to fit your logo's dimensions
@@ -114,6 +125,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  image: {
+    width: 80,
+    height: 80,
+    alignSelf: "center",
+    marginTop: 20,
   },
 });
 

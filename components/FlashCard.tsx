@@ -21,7 +21,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const FlashCard = (props) => {
   const spin = useSharedValue<number>(0);
   const { width } = useWindowDimensions();
-  const { question, answer, getNextCard } = props;
+  const { question, answer } = props;
 
   const rStyle = useAnimatedStyle(() => {
     const spinVal = interpolate(spin.value, [0, 1], [0, 180]);

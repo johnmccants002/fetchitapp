@@ -69,7 +69,7 @@ const CompletionScreen = (props) => {
               backToHomeScreen();
             }}
           >
-            <Text style={styles.buttonText}>Regenerate</Text>
+            <Text style={styles.buttonText}>Back To Home</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.footerText}>0 Coins</Text>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     margin: 10,
     alignItems: "center",
     justifyContent: "center",
-    width: "50%",
+    width: "70%",
     alignSelf: "center",
   },
   // Add styles for the button text

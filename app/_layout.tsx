@@ -53,7 +53,10 @@ function RootLayoutNav() {
     <ThemeProvider value={colorScheme === "dark" ? DefaultTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+        <Stack.Screen
+          name="modal"
+          options={{ presentation: "modal", headerShown: false }}
+        />
         <Stack.Screen
           name="flashcards/[id]"
           options={{ headerTransparent: true }}

@@ -59,6 +59,7 @@ const FlashCards = () => {
         <FlashCard
           question={cards[state.currentIndex].question}
           answer={cards[state.currentIndex].answer}
+          key={cards[state.currentIndex].id}
         />
       );
     }
@@ -144,9 +145,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   button: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     alignItems: "center",
     justifyContent: "center",
   },
