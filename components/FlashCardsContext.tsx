@@ -21,7 +21,7 @@ const initialState: State = {
   isFinished: false,
 };
 
-type Action =
+export type Action =
   | { type: "SET_CARDS"; payload: FlashCard[] }
   | { type: "ANSWER_CORRECT" }
   | { type: "ANSWER_INCORRECT" }
