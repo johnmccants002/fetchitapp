@@ -9,6 +9,8 @@ import {
   StyleSheet,
 } from "react-native";
 import backgroundImage from "../assets/images/doglogo.png";
+import BackgroundAnimation from "../components/PanBackgroundImage";
+import { useNavigation } from "expo-router";
 
 // Import your company's logo image here
 
@@ -16,10 +18,12 @@ const ContactSupportScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const navigation = useNavigation();
 
   const handleSubmit = () => {
     if (!name || !email || !message) {
       Alert.alert("Error", "Please fill in all fields");
+
       return;
     }
 
@@ -30,7 +34,12 @@ const ContactSupportScreen = () => {
     setEmail("");
     setMessage("");
 
-    Alert.alert("Success", "Your support request has been submitted!");
+    Alert.alert("Success", "Your support request has been submitted!", [
+      {
+        text: "Ok",
+        onPress: () => navigation.dispatch({ type: "POP_TO_TOP" }),
+      },
+    ]);
   };
 
   return (

@@ -8,7 +8,12 @@ const Page = () => {
   console.log(params, "PARAMS");
   return (
     <>
-      <Stack.Screen options={{ title: DATA[Number(params.id)].title }} />
+      <Stack.Screen
+        options={{
+          title: DATA[Number(params.id)].title,
+          headerStyle: { backgroundColor: "#57aaf7" },
+        }}
+      />
 
       <FlashCardsProvider>
         <FlashCards />

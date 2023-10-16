@@ -1,9 +1,9 @@
-import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   Modal,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
   useWindowDimensions,
@@ -12,7 +12,7 @@ import { DATA } from "../data/data";
 import useFlashCards from "../hooks/useFlashCards";
 import CompletionScreen from "./CompleteScreen";
 import FlashCard from "./FlashCard";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
 const FlashCards = () => {
   const [isFlipped, setFlipped] = useState(false);
@@ -75,7 +75,7 @@ const FlashCards = () => {
 
   return (
     <View style={[styles.container, { height: height / 2 }]}>
-      {card && card}
+      <Swipeable onEnded={correctAnswer}>{card && card}</Swipeable>
 
       <View style={[styles.buttonsContainer, { width: width * 0.8 }]}>
         <TouchableOpacity
