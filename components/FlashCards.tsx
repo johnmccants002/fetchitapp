@@ -63,8 +63,8 @@ const FlashCards = () => {
 
       <Modal
         visible={complete}
-        animationType="slide"
-        presentationStyle="overFullScreen"
+        animationType="fade"
+        presentationStyle="fullScreen"
       >
         <CompletionScreen />
       </Modal>
