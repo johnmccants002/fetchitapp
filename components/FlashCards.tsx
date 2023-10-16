@@ -1,4 +1,4 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter, useNavigation } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
   Modal,
@@ -28,12 +28,20 @@ const FlashCards = () => {
     incorrectAnswer,
     state,
     resetCards,
+    dispatch,
   } = useFlashCards();
 
   const { width, height } = useWindowDimensions();
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [complete, setComplete] = useState(false);
   const router = useRouter();
+
+  const backToHome = () => {
+    setComplete(false);
+    setTimeout(() => {
+      router.back();
+    }, 20);
+  };
 
   const [card, setCard] = useState<React.ReactElement | null>(null);
 
@@ -85,11 +93,11 @@ const FlashCards = () => {
       </View>
 
       <Modal
-        visible={state.isFinished}
+        visible={complete}
         animationType="fade"
         presentationStyle="fullScreen"
       >
-        <CompletionScreen resetCards={resetCards} />
+        <CompletionScreen resetCards={resetCards} backToHome={backToHome} />
       </Modal>
     </View>
   );

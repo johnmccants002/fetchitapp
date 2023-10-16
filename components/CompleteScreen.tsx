@@ -12,12 +12,14 @@ import { useRouter } from "expo-router";
 import BackgroundAnimation from "./PanBackgroundImage";
 import useFlashCards from "../hooks/useFlashCards";
 import { FlashCardsContext } from "./FlashCardsContext";
+import { useNavigation } from "expo-router";
 
 const CompletionScreen = (props) => {
-  const { resetCards } = props;
+  const { resetCards, backToHome } = props;
   const router = useRouter();
   const { height, width } = useWindowDimensions();
   const context = useContext(FlashCardsContext);
+  const navigation = useNavigation();
 
   if (!context) {
     throw new Error(
@@ -25,6 +27,10 @@ const CompletionScreen = (props) => {
     );
   }
   const [state, dispatch] = context;
+
+  const backToHomeScreen = () => {
+    backToHome();
+  };
 
   // Extract the state and dispatch (if you need it) from the context
   return (
@@ -60,7 +66,7 @@ const CompletionScreen = (props) => {
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() => {
-              // Navigate or reset to the start of the flashcards
+              backToHomeScreen();
             }}
           >
             <Text style={styles.buttonText}>Regenerate</Text>
