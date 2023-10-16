@@ -1,75 +1,23 @@
 import { useRouter } from "expo-router";
-import React from "react";
-import { FlatList, View, Text, useWindowDimensions } from "react-native";
+import React, { useState } from "react";
+import {
+  FlatList,
+  View,
+  Text,
+  useWindowDimensions,
+  StyleSheet,
+  Modal,
+  Pressable,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { DATA } from "../data/data";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-const chemistryFlashcards = [
-  {
-    question: "What is the chemical symbol for water?",
-    answer: "H2O",
-    id: 1,
-  },
-  {
-    question: "Which element has the chemical symbol 'O'?",
-    answer: "Oxygen",
-    id: 2,
-  },
-  {
-    question: "What is the atomic number of carbon?",
-    answer: "6",
-    id: 3,
-  },
-  {
-    question: "What is the chemical formula for methane?",
-    answer: "CH4",
-    id: 4,
-  },
-  {
-    question: "What is the most abundant gas in Earth’s atmosphere?",
-    answer: "Nitrogen",
-    id: 5,
-  },
-  // Add more chemistry flashcards as needed
-];
-
-const psych301Flashcards = [
-  {
-    question: "What is the definition of psychology?",
-    answer: "The scientific study of behavior and mental processes.",
-    id: 1,
-  },
-  {
-    question: "Who is often considered the founder of modern psychology?",
-    answer: "Wilhelm Wundt",
-    id: 2,
-  },
-  {
-    question:
-      "What is the difference between classical conditioning and operant conditioning?",
-    answer:
-      "Classical conditioning is learning through association, while operant conditioning is learning through consequences.",
-    id: 3,
-  },
-  {
-    question:
-      "What is the main idea behind Abraham Maslow's hierarchy of needs?",
-    answer:
-      "People have a series of needs, and fulfilling these needs leads to self-actualization and personal growth.",
-    id: 4,
-  },
-  {
-    question: "Who is known for the social-cognitive theory of personality?",
-    answer: "Albert Bandura",
-    id: 5,
-  },
-  // Add more Psych 301 flashcards as needed
-];
+import Paywall from "./PremiumPaywall";
 
 const MainScreen = () => {
   const { width } = useWindowDimensions();
   const router = useRouter();
+  const [showPremium, setShowPremium] = useState(false);
 
   const Item = (props) => {
     const { title, id } = props;
@@ -96,12 +44,92 @@ const MainScreen = () => {
   };
 
   return (
-    <FlatList
-      data={DATA}
-      renderItem={({ item }) => <Item title={item.title} id={item.id} />}
-      keyExtractor={(item) => item.id}
-    />
+    <>
+      <FlatList
+        data={DATA}
+        renderItem={({ item }) => <Item title={item.title} id={item.id} />}
+        keyExtractor={(item) => item.id}
+      />
+      <View>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => {
+            setShowPremium(true);
+          }}
+        >
+          <Text style={styles.buttonText}>Unlock Premium</Text>
+        </TouchableOpacity>
+      </View>
+      <Modal
+        animationType="slide"
+        // transparent={true}
+        visible={showPremium}
+        // onRequestClose={() => setShowCreateOrg(false)}
+      >
+        <Pressable
+          style={styles.modalBackground}
+          onPress={() => setShowPremium(false)}
+        ></Pressable>
+
+        <View
+          style={{
+            flex: 1,
+            zIndex: 3,
+            overflow: "hidden",
+            marginTop: -10,
+            alignItems: "center",
+            justifyContent: "center",
+            // paddingHorizontal: 20,
+            position: "absolute",
+            top: 80,
+            left: 20,
+            right: 20,
+            bottom: 100,
+            borderRadius: 20,
+            backgroundColor: "white",
+            paddingVertical: 8,
+            paddingHorizontal: 4,
+          }}
+        >
+          <Paywall />
+        </View>
+      </Modal>
+    </>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    backgroundColor: "#4E9ACF", // A nice shade of blue, you can adjust this
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 25, // This makes the button rounded
+    margin: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    alignSelf: "center",
+    marginBottom: 40,
+    zIndex: 99,
+  },
+  // Add styles for the button text
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  modalBackground: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 2,
+  },
+});
 
 export default MainScreen;

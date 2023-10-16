@@ -76,8 +76,8 @@ const FlashCard = (props) => {
 
 const styles = StyleSheet.create({
   front: {
-    height: 400,
-    width: 250,
+    height: 500,
+    width: 300,
     backgroundColor: "#D8D9CF",
     borderRadius: 16,
     position: "absolute",
@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
     backfaceVisibility: "hidden",
   },
   back: {
-    height: 400,
-    width: 250,
+    height: 500,
+    width: 300,
     backgroundColor: "#57aaf7",
     borderRadius: 16,
     backfaceVisibility: "hidden",
