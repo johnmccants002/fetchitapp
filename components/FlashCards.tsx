@@ -21,8 +21,14 @@ const FlashCards = () => {
   const { id } = params;
   console.log(Number(id), "ID");
   const flashcards = DATA[Number(id)].cards;
-  const { cards, currentIndex, correctAnswer, incorrectAnswer, state } =
-    useFlashCards();
+  const {
+    cards,
+    currentIndex,
+    correctAnswer,
+    incorrectAnswer,
+    state,
+    resetCards,
+  } = useFlashCards();
 
   const { width, height } = useWindowDimensions();
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -53,26 +59,10 @@ const FlashCards = () => {
   useEffect(() => {
     if (state.isFinished) {
       setComplete(true);
+    } else {
+      setComplete(false);
     }
   }, [state.isFinished]);
-
-  const getNextCard = () => {
-    // You can implement logic here to fetch the next flashcard
-    // and update the `currentCard` state.
-    console.log("NEXT BUTTON TAPPED");
-    setComplete(true);
-
-    // const nextIndex = (currentCardIndex + 1) % flashcards.length;
-    // setCurrentCardIndex(nextIndex);
-    // setCard(
-    //   <FlashCard
-    //     key={nextIndex}
-    //     question={flashcards[nextIndex].question}
-    //     answer={flashcards[nextIndex].answer}
-    //     getNextCard={getNextCard}
-    //   />
-    // );
-  };
 
   return (
     <View style={[styles.container, { height: height / 2 }]}>
@@ -95,11 +85,11 @@ const FlashCards = () => {
       </View>
 
       <Modal
-        visible={complete}
+        visible={state.isFinished}
         animationType="fade"
         presentationStyle="fullScreen"
       >
-        <CompletionScreen />
+        <CompletionScreen resetCards={resetCards} />
       </Modal>
     </View>
   );

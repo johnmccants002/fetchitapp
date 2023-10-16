@@ -40,6 +40,10 @@ const useFlashCards = () => {
     dispatch({ type: "ANSWER_CORRECT" });
   };
 
+  const resetCards = () => {
+    dispatch({ type: "SET_CARDS", payload: DATA[Number(id)].cards });
+  };
+
   return {
     cards: state.cards,
     correctArray: state.correctArray,
@@ -50,6 +54,7 @@ const useFlashCards = () => {
     incorrectAnswer,
     correctAnswer,
     state: state,
+    resetCards,
   };
 };
 

@@ -13,7 +13,8 @@ import BackgroundAnimation from "./PanBackgroundImage";
 import useFlashCards from "../hooks/useFlashCards";
 import { FlashCardsContext } from "./FlashCardsContext";
 
-const CompletionScreen = () => {
+const CompletionScreen = (props) => {
+  const { resetCards } = props;
   const router = useRouter();
   const { height, width } = useWindowDimensions();
   const context = useContext(FlashCardsContext);
@@ -23,9 +24,9 @@ const CompletionScreen = () => {
       "CompletionScreen must be used within a FlashCardsProvider"
     );
   }
+  const [state, dispatch] = context;
 
   // Extract the state and dispatch (if you need it) from the context
-  const [state, dispatch] = context;
   return (
     <View style={styles.container}>
       <BackgroundAnimation />
@@ -50,7 +51,7 @@ const CompletionScreen = () => {
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() => {
-              // Navigate or reset to the start of the flashcards
+              resetCards();
             }}
           >
             <Text style={styles.buttonText}>Redo</Text>
