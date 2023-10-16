@@ -2,12 +2,12 @@ import { StyleSheet } from "react-native";
 
 import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
-import Profile from "../../components/Profile";
+import MainScreen from "../../components/MainScreen";
 
-export default function TabTwoScreen() {
+export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Profile />
+      <MainScreen />
     </View>
   );
 }

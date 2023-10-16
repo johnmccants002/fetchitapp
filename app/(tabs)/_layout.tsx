@@ -1,14 +1,14 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Link, Tabs } from "expo-router";
+import { Pressable, useColorScheme, Image, View } from "react-native";
 
-import Colors from '../../constants/Colors';
+import Colors from "../../constants/Colors";
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
@@ -20,24 +20,23 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-      }}>
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        headerStyle: { backgroundColor: "#57aaf7" },
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="(index)"
         options={{
-          title: 'Tab One',
+          title: "FetchIt",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerStyle: { backgroundColor: "#57aaf7" },
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
+                <Image
+                  source={require("../../assets/images/logo.jpg")}
+                  style={{ height: 30, width: 30, marginRight: 22 }}
+                />
               </Pressable>
             </Link>
           ),
@@ -46,7 +45,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Tab Two',
+          title: "Profile",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

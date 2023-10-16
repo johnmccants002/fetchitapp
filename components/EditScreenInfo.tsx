@@ -1,77 +1,97 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet,
+} from "react-native";
 
-import Colors from '../constants/Colors';
-import { ExternalLink } from './ExternalLink';
-import { MonoText } from './StyledText';
-import { Text, View } from './Themed';
+const ContactSupportScreen = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
+  const handleSubmit = () => {
+    if (!name || !email || !message) {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
 
-export default function EditScreenInfo({ path }: { path: string }) {
+    // Send the support request using an API or other suitable method
+
+    // Clear form fields after submission
+    setName("");
+    setEmail("");
+    setMessage("");
+
+    Alert.alert("Success", "Your support request has been submitted!");
+  };
+
   return (
-    <View>
-      <View style={styles.getStartedContainer}>
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Open up the code for this screen:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          darkColor="rgba(255,255,255,0.05)"
-          lightColor="rgba(0,0,0,0.05)">
-          <MonoText>{path}</MonoText>
-        </View>
-
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Change any of the text, save the file, and your app will automatically update.
-        </Text>
-      </View>
-
-      <View style={styles.helpContainer}>
-        <ExternalLink
-          style={styles.helpLink}
-          href="https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet">
-          <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
-            Tap here if your app doesn't automatically update after making changes
-          </Text>
-        </ExternalLink>
-      </View>
+    <View style={styles.container}>
+      <Text style={styles.title}>Contact Support</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Your Name"
+        value={name}
+        onChangeText={(text) => setName(text)}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Your Email"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+        keyboardType="email-address"
+      />
+      <TextInput
+        style={[styles.input, styles.messageInput]}
+        placeholder="Your Message"
+        value={message}
+        onChangeText={(text) => setMessage(text)}
+        multiline
+      />
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+  container: {
+    flex: 1,
+    padding: 16,
+    justifyContent: "center",
   },
-  homeScreenFilename: {
-    marginVertical: 7,
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 16,
   },
-  codeHighlightContainer: {
-    borderRadius: 3,
-    paddingHorizontal: 4,
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 4,
+    padding: 12,
+    marginBottom: 16,
+    fontSize: 16,
   },
-  getStartedText: {
-    fontSize: 17,
-    lineHeight: 24,
-    textAlign: 'center',
+  messageInput: {
+    minHeight: 120,
   },
-  helpContainer: {
-    marginTop: 15,
-    marginHorizontal: 20,
-    alignItems: 'center',
+  button: {
+    backgroundColor: "blue",
+    padding: 16,
+    borderRadius: 4,
+    alignItems: "center",
   },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    textAlign: 'center',
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
+
+export default ContactSupportScreen;
