@@ -2,14 +2,29 @@ import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import BackgroundAnimation from "./PanBackgroundImage";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Paywall = ({ onClose, onContinue }) => {
   return (
     <View style={styles.container}>
       <BackgroundAnimation />
-      {/* <View style={styles.header}>
-        <Button title="x" onPress={onClose} />
-      </View> */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={onClose}>
+          <View
+            style={{
+              backgroundColor: "white",
+              height: 50,
+              width: 50,
+              borderRadius: 25,
+              alignItems: "center",
+              justifyContent: "center",
+              opacity: 0.5,
+            }}
+          >
+            <MaterialCommunityIcons size={25} name="close" />
+          </View>
+        </TouchableOpacity>
+      </View>
 
       <View style={styles.card}>
         <Text style={styles.title}>Unlock Premium</Text>
@@ -54,9 +69,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    position: "absolute",
+    left: 10,
+    top: 10,
+    width: 30,
+    height: 50,
   },
   title: {
     fontSize: 18,

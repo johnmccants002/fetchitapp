@@ -43,6 +43,10 @@ const MainScreen = () => {
     );
   };
 
+  const onClose = () => {
+    setShowPremium(false);
+  };
+
   return (
     <>
       <FlatList
@@ -91,7 +95,7 @@ const MainScreen = () => {
             paddingHorizontal: 4,
           }}
         >
-          <Paywall />
+          <Paywall onClose={onClose} />
         </View>
       </Modal>
     </>
