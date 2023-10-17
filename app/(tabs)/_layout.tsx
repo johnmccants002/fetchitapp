@@ -3,6 +3,7 @@ import { Link, Tabs } from "expo-router";
 import { Pressable, useColorScheme, Image, View } from "react-native";
 
 import Colors from "../../constants/Colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -46,6 +47,27 @@ export default function TabLayout() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerRight: () => (
+            <Link href="/settings" asChild>
+              <Pressable>
+                <View
+                  style={{
+                    height: 80,
+                    width: 80,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="settings-helper"
+                    size={40}
+                    color={"black"}
+                    style={{ paddingBottom: 60 }}
+                  />
+                </View>
+              </Pressable>
+            </Link>
+          ),
         }}
       />
     </Tabs>

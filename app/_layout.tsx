@@ -61,6 +61,10 @@ function RootLayoutNav() {
           name="flashcards/[id]"
           options={{ headerTransparent: true }}
         />
+        <Stack.Screen
+          name="settings"
+          options={{ presentation: "fullScreenModal", headerShown: false }}
+        />
       </Stack>
     </ThemeProvider>
   );
