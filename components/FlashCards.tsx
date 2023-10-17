@@ -7,12 +7,14 @@ import {
   TouchableOpacity,
   View,
   useWindowDimensions,
+  Text,
 } from "react-native";
 import { DATA } from "../data/data";
 import useFlashCards from "../hooks/useFlashCards";
 import CompletionScreen from "./CompleteScreen";
 import FlashCard from "./FlashCard";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import ProgressBar from "./ProgressBar";
 
 const FlashCards = () => {
   const [isFlipped, setFlipped] = useState(false);
@@ -67,7 +69,7 @@ const FlashCards = () => {
 
   useEffect(() => {
     if (state.isFinished) {
-      setComplete(true);
+      setTimeout(() => setComplete(true), 1200);
     } else {
       setComplete(false);
     }
@@ -75,6 +77,7 @@ const FlashCards = () => {
 
   return (
     <View style={[styles.container, { height: height / 2 }]}>
+      <ProgressBar />
       <Swipeable onEnded={correctAnswer}>{card && card}</Swipeable>
 
       <View style={[styles.buttonsContainer, { width: width * 0.8 }]}>
