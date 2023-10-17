@@ -51,7 +51,8 @@ const ContactSupportScreen = () => {
       /> */}
 
       {/* Welcome Message */}
-      <View>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Feedback</Text>
         <Text style={styles.title}>
           Welcome to our app! We value your feedback. Please feel free to share
           any issues or suggestions you may have.
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     alignItems: "center",
     paddingTop: 80,
     paddingBottom: 150,
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    textAlign: "center",
+    textAlign: "left",
     marginBottom: 16,
   },
   input: {
@@ -142,6 +143,18 @@ const styles = StyleSheet.create({
     height: 80,
     alignSelf: "center",
     marginTop: 20,
+  },
+  header: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    marginBottom: 30,
+    height: 120,
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#333",
+    textAlign: "left",
   },
 });
 
