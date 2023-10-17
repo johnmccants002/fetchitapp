@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useNavigation } from "expo-router/src/useNavigation";
 import React, { useState } from "react";
@@ -24,9 +25,23 @@ const SettingsScreen = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Settings</Text>
-        <TouchableOpacity style={styles.closeIcon} onPress={dismiss}>
-          <Text style={styles.closeText}>X</Text>
-        </TouchableOpacity>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={dismiss}>
+            <View
+              style={{
+                backgroundColor: "white",
+                height: 50,
+                width: 50,
+                borderRadius: 25,
+                alignItems: "center",
+                justifyContent: "center",
+                opacity: 0.5,
+              }}
+            >
+              <MaterialCommunityIcons size={25} name="close" />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <TextInput
