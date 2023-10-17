@@ -56,7 +56,6 @@ const ContactSupportScreen = () => {
           Welcome to our app! We value your feedback. Please feel free to share
           any issues or suggestions you may have.
         </Text>
-        <Image source={backgroundImage} style={styles.image} />
       </View>
 
       {/* Contact Form */}
@@ -64,12 +63,14 @@ const ContactSupportScreen = () => {
         <TextInput
           style={styles.input}
           placeholder="Your Name"
+          placeholderTextColor={"gray"}
           value={name}
           onChangeText={(text) => setName(text)}
         />
         <TextInput
           style={styles.input}
           placeholder="Your Email"
+          placeholderTextColor={"gray"}
           value={email}
           onChangeText={(text) => setEmail(text)}
           keyboardType="email-address"
@@ -77,6 +78,7 @@ const ContactSupportScreen = () => {
         <TextInput
           style={[styles.input, styles.messageInput]}
           placeholder="Your Message"
+          placeholderTextColor={"gray"}
           value={message}
           onChangeText={(text) => setMessage(text)}
           multiline
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
     padding: 16,
     justifyContent: "space-between",
     alignItems: "center",
-    paddingTop: 120,
+    paddingTop: 80,
     paddingBottom: 150,
   },
   inputContainer: {
