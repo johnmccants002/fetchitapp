@@ -3,13 +3,10 @@ import { StyleSheet } from "react-native";
 import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 import MainScreen from "../../components/MainScreen";
+import Main from "../../components/Main";
 
 export default function TabOneScreen() {
-  return (
-    <View style={styles.container}>
-      <MainScreen />
-    </View>
-  );
+  return <Main />;
 }
 
 const styles = StyleSheet.create({

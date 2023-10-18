@@ -8,7 +8,7 @@ function reducer(state: State, action: Action): State {
       return { ...initialState, cards: action.payload };
     case "ANSWER_CORRECT":
       const nextIndexCorrect = state.currentIndex + 1;
-      const correctCardId = state.cards[state.currentIndex].id; // Assuming each card has an "id" property
+      const correctCardId = state.cards[state.currentIndex].id;
 
       return {
         ...state,
@@ -19,7 +19,7 @@ function reducer(state: State, action: Action): State {
       };
     case "ANSWER_INCORRECT":
       const nextIndexIncorrect = state.currentIndex + 1;
-      const incorrectCardId = state.cards[state.currentIndex].id; // Assuming each card has an "id" property
+      const incorrectCardId = state.cards[state.currentIndex].id;
 
       return {
         ...state,
