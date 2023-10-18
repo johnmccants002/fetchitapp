@@ -66,6 +66,7 @@ function RootLayoutNav() {
           name="settings"
           options={{ presentation: "fullScreenModal", headerShown: false }}
         />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );
